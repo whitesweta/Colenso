@@ -6,3 +6,25 @@ body {
 a {
   color: #00B7FF;
 }
+
+heading {
+	font-size: 4em;
+	text-align: center;
+	font-weight: 500;
+}
+
+intro {
+	font-size: 1.2em;
+}
+
+smallBold {
+	font-size: 1.07em;
+	font-weight: bold;
+}
+
+containerButtons{
+	display: flex;
+	justify-content: space-between;
+	padding-left: 15%;
+	padding-right: 15%;
+}

@@ -5,6 +5,9 @@ html
 		link(rel='stylesheet', href='/stylesheets/style.css')
 		link(href='css/bootstrap.min.css', rel='stylesheet')
 		link(href='css/scrolling-nav.css', rel='stylesheet')
+		link(href='css/buttons.css', rel='stylesheet')
+		link(rel='shortcut icon', href='/img/favicon.ico', type='image/x-icon')
+		link(rel='icon', href='/img/favicon.ico', type='image/x-icon')
 	body
 		#page-top(data-spy='scroll', data-target='.navbar-fixed-top')
 			//Navigation
@@ -24,25 +27,25 @@ html
 						li.hidden
 							a.page-scroll(href='#page-top')
 						li
-							a.page-scroll(href='#about') About
+							a.page-scroll(href='#browse') Browse
 						li
-							a.page-scroll(href='#services') Services
+							a.page-scroll(href='#search') Search
 						li
-							a.page-scroll(href='#contact') Contact
+							a.page-scroll(href='#add') Add
 					// /.navbar-collapse
 				// /.container 
 		// Intro Section
 		section#intro.intro-section
 			block Intro 
 		//About Section
-		section#about.about-section
-			block About
+		section#browse.browse-section
+			block Browse
 		//Services Section
-		section#services.services-section
-			block Services
+		section#search.search-section
+			block Search
 		//Contact Section
-		section#contact.contact-section
-			block Contact	
+		section#add.add-section
+			block Add
 		script(src='js/jquery.js')
 		script(src='js/bootstrap.min.js')
 		script(src='js/jquery.easing.min.js')

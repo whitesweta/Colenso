@@ -33,28 +33,29 @@ of those sections to manage the look and feel of the site. */
 
 .intro-section {
     height: 100%;
-    padding-top: 150px;
+    /*padding-top: 150px;*/
+    padding-top: 10%;
     text-align: center;
+    background: #f6f8ed;
+}
+
+.browse-section {
+    height: 100%;
+    padding-top: 5%;
+    text-align: left;
     background: #fff;
 }
 
-.about-section {
+.search-section {
     height: 100%;
-    padding-top: 150px;
-    text-align: center;
-    background: #eee;
+    padding-top: 5%;
+    text-align: left;
+    background: #f6f8ed;
 }
 
-.services-section {
+.add-section {
     height: 100%;
-    padding-top: 150px;
-    text-align: center;
-    background: #fff;
-}
-
-.contact-section {
-    height: 100%;
-    padding-top: 150px;
-    text-align: center;
-    background: #eee;
+    padding-top: 5%;
+    text-align: left;
+    background: #fff
 }
