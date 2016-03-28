@@ -1,5 +1,38 @@
 extends layout
+doctype html
+html(lang='en')
 
-block content
-  h1= title
-  p Welcome to #{title}
+block Intro
+	.container
+		.row
+			.col-lg-12
+			h1 Scrolling Nav
+			p
+			strong YO YO YO THIS IS A TEST
+			|  Make sure to include the
+			code scrolling-nav.js
+			| ,
+			code jquery.easing.min.js
+			| , and 
+			code scrolling-nav.css
+			|  files. To make a link smooth scroll to another section on the page, give 
+			the link the 
+			code .page-scroll
+			|  class and set the link target to a corresponding ID on the page.
+			br
+			a.btn.btn-default.page-scroll(href='#about') Click Me to Scroll Down!
+block About
+	.container
+		.row
+			.col-lg-12
+			h1 About Section
+block Services
+	.container
+		.row
+			.col-lg-12
+			h1 Services Section
+block Contact
+	.container
+		.row
+			.col-lg-12
+			h1 Contact Section

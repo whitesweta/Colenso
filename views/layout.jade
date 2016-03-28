@@ -1,7 +1,49 @@
 doctype html
 html
-  head
-    title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
-  body
-    block content
+	head
+		title= 'The Colenso Project'
+		link(rel='stylesheet', href='/stylesheets/style.css')
+		link(href='css/bootstrap.min.css', rel='stylesheet')
+		link(href='css/scrolling-nav.css', rel='stylesheet')
+	body
+		#page-top(data-spy='scroll', data-target='.navbar-fixed-top')
+			//Navigation
+		nav.navbar.navbar-default.navbar-fixed-top.navbar-inverse(role='navigation')
+			.container
+				.navbar-header.page-scroll
+					button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-ex1-collapse')
+						span.sr-only Toggle navigation
+						span.icon-bar
+						span.icon-bar
+						span.icon-bar
+					a.navbar-brand.page-scroll(href='#page-top') The Colenso Project.
+					//Collect nav links, forms and other content for toggling
+				.collapse.navbar-collapse.navbar-ex1-collapse
+					ul.nav.navbar-nav
+						//Hidden li included to remove action class from about link when scrolled up past about section
+						li.hidden
+							a.page-scroll(href='#page-top')
+						li
+							a.page-scroll(href='#about') About
+						li
+							a.page-scroll(href='#services') Services
+						li
+							a.page-scroll(href='#contact') Contact
+					// /.navbar-collapse
+				// /.container 
+		// Intro Section
+		section#intro.intro-section
+			block Intro 
+		//About Section
+		section#about.about-section
+			block About
+		//Services Section
+		section#services.services-section
+			block Services
+		//Contact Section
+		section#contact.contact-section
+			block Contact	
+		script(src='js/jquery.js')
+		script(src='js/bootstrap.min.js')
+		script(src='js/jquery.easing.min.js')
+		script(src='js/scrolling-nav.js')
