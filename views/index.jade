@@ -40,6 +40,8 @@ block Browse
 		.row
 			.col-lg-12
 			h1 Browse
+			smallBold Use the navigation bar in order to browse for the desired letter in order to view it in more detail
+			br
 			br
 			br
 			nav.navbar.navbar.navbar-inverse
@@ -96,26 +98,8 @@ block Browse
 										a(href='#') Tamihana_Te_Rauparaha
 									li
 										a(href='#') Unknown
-			br
-			br
-			br
-			br
-			br
-			br
-			br
-			br
-			br
-			br
-			br
-			br
-			br
-			br
-			br
-			br
-			br
-			br
-			br
-			br
+							li
+								a(href="/All") All
 			br
 			br
 			br
@@ -133,22 +117,58 @@ block Search
 	.container
 		.row
 			.col-lg-12
-			h1 Search by String
+			h1 Search
 			.container
+				smallBold You can search for a specific letter using either a String or XQuery here:
+				br
+				br
+				br
 				form(action = "/search", method = "get")
-					input("text", name = "searchString")
+					input#string.form-control(type='text', placeholder='Enter a string', name = "searchString")
+					br
+					input(type="submit")
+				br
+				br
+				br
+				br
+				br
+				br
+				form(action = "/searchxquery", method = "get")
+					input#xquery.form-control(type='text', placeholder='Enter an XQuery', name = "searchXQuery")
+					br
 					input(type="submit")
 			br
 			br
 			br
-			h1 Search by XQuery
-				.container
-					form(action = "/searchxquery", method = "get")
-						input("text", name = "searchXQuery")
-						input(type="submit")
+			br
+			br
+			br
+			br
+
 block Add
 	.container
 		.row
 			.col-lg-12
 			h1 Add
+			br
+			br
+			br
+			br
+			br
+			br
+			br
+			br
+			br
+			br
+			br
+			br
+			br
+			br
+			br
+			br
+			br
+			br
+			br
+			br
+
 

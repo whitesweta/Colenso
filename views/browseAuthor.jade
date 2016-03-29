@@ -1,0 +1,17 @@
+extends layout2
+block content
+	br
+	br
+	br
+	br
+	br
+	.container
+		heading Browse
+		br
+		p You are browsing: 
+		strong #{author}
+
+	.container
+		each file in files
+			li
+				a(href = "/viewFile?file=" + file)!{file}

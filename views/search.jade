@@ -8,13 +8,12 @@ block content
 	.container
 		heading Search by String
 		br
-		p You searched for: 
+		p You searched for  
 		strong #{searchString}
 		br
-		p #{length}
 		br
-		p #{isRaw}
-
+		p Your query had #{numResults} results, these are listed below:
+		br
 	.container
 		each file in files
 			li
