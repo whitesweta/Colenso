@@ -133,11 +133,19 @@ block Search
 	.container
 		.row
 			.col-lg-12
-			h1 Search 
+			h1 Search by String
 			.container
 				form(action = "/search", method = "get")
 					input("text", name = "searchString")
 					input(type="submit")
+			br
+			br
+			br
+			h1 Search by XQuery
+				.container
+					form(action = "/searchxquery", method = "get")
+						input("text", name = "searchXQuery")
+						input(type="submit")
 block Add
 	.container
 		.row

@@ -58,12 +58,31 @@ router.get("/search",function(req,res){
 	  }
 	  else {
       var TEIs = result.result.split('\n');
+      var length = TEIs.length;
       res.render('search', {files: TEIs, searchString: query, numResults: length});
 	 }
 	});
 });
 
 
+//SEARCH BY XQUERY
+router.get("/searchxquery", function(req,res){
+  var query = req.query.searchXQuery;
+  client.execute(("XQUERY declare default element namespace 'http://www.tei-c.org/ns/1.0';" + "for $n in (collection('Colenso/')"+ query +")" + "return db:path($n)"),
+  function(error,result){
+    if(error){
+      console.error(error);
+    }
+    else{
+      var TEIs = result.result.split('\n');
+      var length = TEIs.length;
+      res.render('searchxquery',{files: TEIs, searchString: query, numResults: length});
+    }
+  });
+});
+
+
+//GET INFO FOR MAIN PAGE
 router.get("/",function(req,res){
 	client.execute("XQUERY declare default element namespace 'http://www.tei-c.org/ns/1.0';" +
 		" (//name[@type='place'])[1] ",
@@ -79,6 +98,8 @@ router.get("/",function(req,res){
 });
 
 
+
+//OTHER FUNCTIONS
 function unique(arr) {
     var hash = {};
     var result = [];
