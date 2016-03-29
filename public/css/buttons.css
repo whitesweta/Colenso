@@ -55,7 +55,7 @@
 	color: #ffffff;
 }
 .btn-success:hover, .btn-success:focus, .btn-success:active, .btn-success.active, .open > .dropdown-toggle.btn-success {
-	background: #39bf87;
+	background: #004d2d;
 }
 .btn-success:active, .btn-success.active {
 	background: #008c52;
@@ -133,8 +133,8 @@
 	color: #636f2a;
 }
 .btn-success.outline:active, .btn-success.outline.active {
-	border-color: #008c52;
-	color: #008c52;
+	border-color: #728132;
+	color: #728132;
 	box-shadow: none;
 }
 .btn-info.outline {
