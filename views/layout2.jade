@@ -1,5 +1,5 @@
 doctype html
-html
+html(lang='en')
 	head
 		title= 'The Colenso Project'
 		link(rel='stylesheet', href='/stylesheets/style.css')
@@ -19,35 +19,17 @@ html
 						span.icon-bar
 						span.icon-bar
 						span.icon-bar
-					a.navbar-brand.page-scroll(href='#page-top') The Colenso Project.
+					a.navbar-brand.page-scroll(href='/') The Colenso Project.
 					//Collect nav links, forms and other content for toggling
 				.collapse.navbar-collapse.navbar-ex1-collapse
 					ul.nav.navbar-nav
 						//Hidden li included to remove action class from about link when scrolled up past about section
 						li.hidden
-							a.page-scroll(href='#page-top')
+							a.page-scroll(href='/')
 						li
-							a.page-scroll(href='#browse') Browse
+							a.page-scroll(href='/#browse') Browse
 						li
-							a.page-scroll(href='#search') Search
+							a.page-scroll(href='/#search') Search
 						li
-							a.page-scroll(href='#add') Add
-					// /.navbar-collapse
-				// /.container 
-		// Intro Section
-		section#intro.intro-section
-			block Intro 
-		//About Section
-		section#browse.browse-section
-			block Browse
-		//Services Section
-		section#search.search-section
-			block Search
-		//Contact Section
-		section#add.add-section
-			block Add
-		script(src='js/jquery.js')
-		script(src='js/bootstrap.min.js')
-		script(src='js/jquery.easing.min.js')
-		script(src='js/scrolling-nav.js')
-		block content
+							a.page-scroll(href='/#add') Add
+	block content

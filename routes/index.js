@@ -1,19 +1,94 @@
+var basex = require('basex');
+var client = new basex.Session("127.0.0.1", 1984, "admin", "admin");
+client.execute("OPEN Colenso");
 var express = require('express');
 var router = express.Router();
 
-var basex = require('basex');
-var client = new basex.Session("127.0.0.1", 1984, "admin", "admin");
+//GLOBAL VARIABLES//
+var xml_lines = null;
+var firstLocation = [];
+var uniquePlaces = [];
 
-client.execute("OPEN Colenso");
 
-client.execute("XQUERY declare default element namespace 'http://www.tei-c.org/ns/1.0'; " +
-    "//name[@type = 'place' and position() = 1 and . = 'Manawarakau']",
-    function(err,res) { if(!err) console.log(res.result)} );
+//FOR BROWSE - INCOMPLETE//
+client.execute("XQUERY db:list('Colenso')",
+	function (error, result) {
+		if(error){ 
+			console.error(error);
+		}
+		else {
+				var xml_results = result.result;
+				xml_lines = xml_results.split("\n");
+				for (var i = 0; i < xml_lines.length; ++i) {
+  					var res = xml_lines[i].split("/");
+  					firstLocation.push(res[0]);
+				}
+				uniquePlaces = unique(firstLocation);
+				for (var i = 0; i < uniquePlaces.length; ++i) {
+  					console.log('value at index [' + i + '] is: [' + uniquePlaces[i] + ']');
+  			}
+			}
+		}
+	)
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+
+//VIEW FILE IN NICE READABLE TEXT
+router.get("/viewFile",function(req,res){
+client.execute("XQUERY declare default element namespace 'http://www.tei-c.org/ns/1.0';" +
+  	"(doc('Colenso/"+req.query.file+"'))[1]",
+function (error, result) {
+  if(error){
+	   console.error(error);
+	  }
+	else {
+    fileName = req.query.file;
+    res.render('viewFile', { title: 'Colenso Project', file: result.result });
+	 }
+	});
 });
 
+
+//SEARCH BY STRING
+router.get("/search",function(req,res){
+  var query = req.query.searchString;
+  client.execute(("XQUERY declare default element namespace 'http://www.tei-c.org/ns/1.0';" + "for $v in .//TEI[. contains text "+query+"] return db:path($v)"),
+  function (error, result) {
+    if(error){
+	     console.error(error);
+	  }
+	  else {
+      var TEIs = result.result.split('\n');
+      res.render('search', {files: TEIs, searchString: query, numResults: length});
+	 }
+	});
+});
+
+
+router.get("/",function(req,res){
+	client.execute("XQUERY declare default element namespace 'http://www.tei-c.org/ns/1.0';" +
+		" (//name[@type='place'])[1] ",
+		function (error, result) {
+			if(error){ console.error(error);
+		}
+			else {
+				console.log(req.query.searchString);
+				res.render('index', { test: 'testtest', title: 'The Colenso Project', database_list: uniquePlaces, search_result: result.result });
+
+			}
+		});
+});
+
+
+function unique(arr) {
+    var hash = {};
+    var result = [];
+    for ( var i = 0, l = arr.length; i < l; ++i ) {
+        if ( !hash.hasOwnProperty(arr[i]) ) { 
+            hash[ arr[i] ] = true;
+            result.push(arr[i]);
+        }
+    }
+    return result;
+}
 
 module.exports = router;

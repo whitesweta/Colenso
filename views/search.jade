@@ -1,0 +1,21 @@
+extends layout2
+block content
+	br
+	br
+	br
+	br
+	br
+	.container
+		heading Search by String
+		br
+		p You searched for: 
+		strong #{searchString}
+		br
+		p #{length}
+		br
+		p #{isRaw}
+
+	.container
+		each file in files
+			li
+				a(href = "/viewFile?file=" + file)!{file}

@@ -6,7 +6,7 @@ block Intro
 	.container
 		.row
 			.col-lg-12
-			heading The Colenso Project.
+			heading #{title}.
 			p
 			br
 			br
@@ -39,12 +39,105 @@ block Browse
 	.container
 		.row
 			.col-lg-12
-			h1 Browse 
+			h1 Browse
+			br
+			br
+			nav.navbar.navbar.navbar-inverse
+				.container-fluid
+					.navbar-header
+						button.navbar-toggle(type='button', data-toggle='collapse', data-target='#myNavbar')
+							span.icon-bar
+							span.icon-bar
+							span.icon-bar
+						a.navbar-brand Author
+					#myNavbar.collapse.navbar-collapse
+						ul.nav.navbar-nav
+							li.dropdown
+								a.dropdown-toggle(data-toggle='dropdown', href='#')
+									| Colenso
+									span.caret
+								ul.dropdown-menu
+									li
+										a(href='#') Diary
+									li
+										a(href='#') Newspaper Letters
+									li
+										a(href='#') Private Letters
+							li
+								a(href='#') Haast
+							li.dropdown
+								a.dropdown-toggle(data-toggle='dropdown', href='#')
+									| Hadfield
+									span.caret
+								ul.dropdown-menu
+									li
+										a(href='#') Diary
+									li
+										a(href='#') Private Letters
+							li
+								a(href='#') Hector
+							li
+								a(href='#') Holmes
+							li
+								a(href='#') Hooker
+							li
+								a(href='#') Mclean
+							li.dropdown
+								a.dropdown-toggle(data-toggle='dropdown', href='#')
+									| Other
+									span.caret
+								ul.dropdown-menu
+									li
+										a(href='#') Cotton
+								ul.dropdown-menu
+									li
+										a(href='#') Hogg
+									li
+										a(href='#') Tamihana_Te_Rauparaha
+									li
+										a(href='#') Unknown
+			br
+			br
+			br
+			br
+			br
+			br
+			br
+			br
+			br
+			br
+			br
+			br
+			br
+			br
+			br
+			br
+			br
+			br
+			br
+			br
+			br
+			br
+			br
+			br
+			br
+			br
+			br
+			br
+			br
+			br
+
+
+			
 block Search
 	.container
 		.row
 			.col-lg-12
-			h1 Search
+			h1 Search 
+			.container
+				form(action = "/search", method = "get")
+					input("text", name = "searchString")
+					input(type="submit")
 block Add
 	.container
 		.row
