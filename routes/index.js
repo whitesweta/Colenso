@@ -9,8 +9,13 @@ var xml_lines = null;
 var firstLocation = [];
 var uniquePlaces = [];
 var Colenso = [];
+var Colensodiary = [];
+var Colensonewspaper = [];
+var Colensoprivate = [];
 var Haast = [];
 var Hadfield = [];
+var Haddiary = [];
+var Hadprivate = [];
 var Hector = [];
 var Holmes = [];
 var Hooker = [];
@@ -34,8 +39,31 @@ client.execute("XQUERY db:list('Colenso')",
   					if(res[0]==="Haast"){
   						Haast.push(xml_lines[i]);
   					}
+  					else if(res[0]==="Colenso"){
+  						Colenso.push(xml_lines[i]);
+  						var res2 = xml_lines[i].split("/");
+  						if(res2[1]==="diary"){
+  							Colensodiary.push(xml_lines[i]);
+  						}
+  						else if(res2[1]==="newspaper_letters"){
+  							Colensonewspaper.push(xml_lines[i]);
+  						}
+  						else{
+  							Colensoprivate.push(xml_lines[i]);
+  						}
+  					}
+  					else if(res[0]==="Hadfield"){
+  						Hadfield.push(xml_lines[i]);
+  						var res2 = xml_lines[i].split("/");
+  						if(res2[1]==="diary"){
+  							Haddiary.push(xml_lines[i]);
+  						}
+  						else{
+  							Hadprivate.push(xml_lines[i]);
+  						}
+  					}
   					else if(res[0]==="Hector"){
-  						Haast.push(xml_lines[i]);
+  						Hector.push(xml_lines[i]);
   					}
   					else if(res[0]==="Holmes"){
   						Holmes.push(xml_lines[i]);
@@ -43,8 +71,11 @@ client.execute("XQUERY db:list('Colenso')",
   					else if(res[0]==="Hooker"){
   						Hooker.push(xml_lines[i]);
   					}
-  					else if(res[0]==="Mclean"){
+  					else if(res[0]==="McLean"){
   						Mclean.push(xml_lines[i]);
+  					}
+  					else{
+  						Other.push(xml_lines[i]);
   					}
 				}
 				//use this to populate nav bar?? i don't know how to do this so its hard coded
@@ -120,10 +151,102 @@ router.get('/download', function(req, res) {
 router.get("/All",function(req,res){
 
       var TEIs = xml_lines;
-      var length = TEIs.length - 1;
+      var length = TEIs.length;
       res.render('All', {files: TEIs, numResults: length});
 
 });
+
+//SEE HAAST
+router.get("/haast",function(req,res){
+
+      var TEIs = Haast;
+      var length = TEIs.length;
+      res.render('haast', {files: TEIs, numResults: length});
+
+});
+
+//SEE HECTOR
+router.get("/hector",function(req,res){
+
+      var TEIs = Hector;
+      var length = TEIs.length;
+      res.render('hector', {files: TEIs, numResults: length});
+
+});
+
+//SEE HOLMES
+router.get("/holmes",function(req,res){
+
+      var TEIs = Holmes;
+      var length = TEIs.length;
+      res.render('holmes', {files: TEIs, numResults: length});
+
+});
+
+//SEE HOOKER
+router.get("/hooker",function(req,res){
+
+      var TEIs = Hooker;
+      var length = TEIs.length;
+      res.render('hooker', {files: TEIs, numResults: length});
+
+});
+
+//SEE MCLEAN
+router.get("/mclean",function(req,res){
+      var TEIs = Mclean;
+      var length = TEIs.length;
+      res.render('mclean', {files: TEIs, numResults: length});
+
+});
+
+//SEE OTHER
+router.get("/others",function(req,res){
+      var TEIs = Other;
+      var length = TEIs.length;
+      res.render('others', {files: TEIs, numResults: length});
+
+});
+
+//SEE ColensoDiary
+router.get("/colensodiary",function(req,res){
+      var TEIs = Colensodiary;
+      var length = TEIs.length;
+      res.render('colensodiary', {files: TEIs, numResults: length});
+
+});
+
+//SEE HadDiary
+router.get("/haddiary",function(req,res){
+      var TEIs = Haddiary;
+      var length = TEIs.length;
+      res.render('haddiary', {files: TEIs, numResults: length});
+
+});
+
+//SEE ColensoNewspaper
+router.get("/colensonewspaper",function(req,res){
+      var TEIs = Colensonewspaper;
+      var length = TEIs.length;
+      res.render('colensonewspaper', {files: TEIs, numResults: length});
+
+});
+
+//SEE ColensoPrivate
+router.get("/colensoprivate",function(req,res){
+      var TEIs = Colensoprivate;
+      var length = TEIs.length;
+      res.render('colensoprivate', {files: TEIs, numResults: length});
+
+});
+//SEE HadPrivate
+router.get("/hadprivate",function(req,res){
+      var TEIs = Hadprivate;
+      var length = TEIs.length;
+      res.render('hadprivate', {files: TEIs, numResults: length});
+
+});
+
 
 //SEARCH BY STRING
 router.get("/search",function(req,res){

@@ -1,0 +1,17 @@
+extends layout2
+block content
+	br
+	br
+	br
+	br
+	br
+	.container
+		heading McLean Files
+		br
+		p You are browsing letters tagged with the author McLean
+		br
+		br
+	.container
+		each file in files
+			li
+				a(href = "/viewFile?file=" + file)!{file}

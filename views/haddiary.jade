@@ -1,0 +1,18 @@
+extends layout2
+block content
+	br
+	br
+	br
+	br
+	br
+	.container
+		heading Hadfield:
+		br
+		p You are browsing letters tagged with the author Hadfield and are diary entrys
+		br
+		br
+		p There are #{numResults} results, these are listed below:
+	.container
+		each file in files
+			li
+				a(href = "/viewFile?file=" + file)!{file}
