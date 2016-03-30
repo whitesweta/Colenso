@@ -12,12 +12,17 @@ block content
 		strong #{searchString}
 		br
 		br
-		p Your query had #{numResults} results, these are listed below:
-		br
+		p If you want to search within these results, enter in another string below
 		form(action = "/search", method = "get")
-					input#string.form-control(type='text', placeholder='Enter a string', name = "searchString" )
+					input#string.form-control(type='text', placeholder='Enter a string again', name = "searchStringAgain")
 					br
 					input(type="submit")
+		br
+		br
+		p Your query had #{numResults} results, these are listed below:
+		//a.btn-xl.outline(href='/downloadall') Download All
+		br
+		br
 	.container
 		each file in files
 			li

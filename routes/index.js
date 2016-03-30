@@ -27,6 +27,7 @@ var Mclean = [];
 var Other = [];
 var fileName = "";
 var searchedQuery = "";
+var searchResults = "";
 
 
 //FOR BROWSE - INCOMPLETE//
@@ -151,6 +152,28 @@ router.get('/download', function(req, res) {
 	});
 });
 
+/*DOWNLOAD ALL DOES NOT WORK
+router.get('/downloadall', function(req, res) {
+	for(var i =0; i<searchResults.length; i++){
+
+		client.execute("XQUERY declare default element namespace 'http://www.tei-c.org/ns/1.0';" +
+		"(doc('Colenso/"+searchResults[i]+"'))[1]",
+		function (error, result) {
+			if(error){
+				console.error(error);
+			}
+			else {
+				var name = searchResults[i];
+				res.writeHead(200, {
+					'Content-Type': 'application/force-download','Content-disposition': 'attachment; filename=' + name,
+				});
+				res.write(result.result);
+				res.end();
+			}
+		});
+	}
+});
+*/
 
 //SEE ALL
 router.get("/All",function(req,res){
@@ -255,8 +278,15 @@ router.get("/hadprivate",function(req,res){
 
 //SEARCH BY STRING
 router.get("/search",function(req,res){
-	console.log("Here again");
-	//console.log(searchStringAgain);
+	if(req.query.searchStringAgain!==undefined){
+		var query = req.query.searchStringAgain;
+		var fullQuery0 = query.replace(/ AND /g, '\' ftand \'');
+		var fullQuery01 = fullQuery0.replace(/ NOT /g, '\' ftnot \'');
+		var fullQuery02 = fullQuery01.replace(/ OR /g, '\' ftor \'');
+		var fullQuery = fullQuery02.replace(/\"/g, '\'');
+		searchedQuery = searchedQuery + " ftand " + fullQuery;
+		console.log("this is the nested query" + searchedQuery);
+	} else{
 	var fullQuery = "";
 	var query = req.query.searchString;
 	var fullQuery0 = query.replace(/ AND /g, '\' ftand \'');
@@ -264,44 +294,22 @@ router.get("/search",function(req,res){
 	var fullQuery02 = fullQuery01.replace(/ OR /g, '\' ftor \'');
 	fullQuery = fullQuery02.replace(/\"/g, '\'');
 	searchedQuery = fullQuery;
-	client.execute(("XQUERY declare default element namespace 'http://www.tei-c.org/ns/1.0';" + "for $v in .//TEI[. contains text "+fullQuery+" using wildcards] return db:path($v)"),
+	console.log("this is the not nested query" + searchedQuery);
+	}
+	client.execute(("XQUERY declare default element namespace 'http://www.tei-c.org/ns/1.0';" + "for $v in .//TEI[. contains text "+searchedQuery+" using wildcards] return db:path($v)"),
 	function (error, result) {
 	if(error){
 		console.error(error);
 	}
 	else {
 	var TEIs = result.result.split('\n');
+	searchResults = TEIs;
 	var length = TEIs.length;
-	res.render('search', {files: TEIs, searchString: query, numResults: length});
+	res.render('search', {files: TEIs, searchString: searchedQuery, numResults: length});
 	}
 	});
 });
 
-
-//ATTEMPTING NESTED SEARCH, NOT WORKING
-/*
-router.get("/searchAgain",function(req,res){
-  var query = req.query.searchString;
-  var fullQuery0 = query.replace(/ AND /g, '\' ftand \'');
-  var fullQuery01 = fullQuery0.replace(/ NOT /g, '\' ftnot \'');
-  var fullQuery02 = fullQuery01.replace(/ OR /g, '\' ftor \'');
-  var fullQuery = fullQuery02.replace(/\"/g, '\'');
-
-  
-  var com
-  client.execute(("XQUERY declare default element namespace 'http://www.tei-c.org/ns/1.0';" + "for $v in .//TEI[. contains text "+searchedQuery+"] return db:path($v)"),
-  function (error, result) {
-	if(error){
-		 console.error(error);
-	  }
-	  else {
-	  var TEIs = result.result.split('\n');
-	  var length = TEIs.length;
-	  res.render('search', {files: TEIs, searchString: query, numResults: length});
-	 }
-	});
-});
-*/
 
 //SEARCH BY XQUERY
 router.get("/searchxquery", function(req,res){
@@ -338,7 +346,7 @@ router.get("/",function(req,res){
 
 
 //ADD FUNCTION
-router.post('/upload', function(req, res){
+router.post('/add', function(req, res){
     var queries = req.query;
     if(req.file){
         var pathOfFile = queries.path + req.file.originalname;

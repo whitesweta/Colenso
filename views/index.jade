@@ -146,7 +146,7 @@ block Add
 				br
 				br
 				br
-				form(action="/upload?path=" + path, method="post", enctype="multipart/form-data")
+				form(action="/add?path=" + path, method="post", enctype="multipart/form-data")
 					input.form-control(type="file", placeholder='Please select a file', name="file")
 					br
 					button(type="submit") Add to Database
