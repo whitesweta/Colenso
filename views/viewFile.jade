@@ -1,12 +1,15 @@
 extends layout2
 
 block content
-  .container
-    br
-    br
-    br
-    rightAligned 
-        a.btn-xl.outline(href='/viewRaw') View Raw
-        br
-        br
-    p| !{file}
+	.container
+		br
+		br
+		br
+		rightAligned 
+		.btn-group(role='group', aria-label="...")
+			a.btn-xl.outline(href='/download') Download
+			a.btn-xl.outline(href='/viewRaw')          
+			a.btn-xl.outline(href='/viewRaw') View Raw
+		br
+		br
+		p| !{file}

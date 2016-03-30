@@ -77,6 +77,7 @@ function (error, result) {
 	});
 });
 
+
 //VIEW RAW
 router.get("/viewRaw",function(req,res){
 client.execute("XQUERY declare default element namespace 'http://www.tei-c.org/ns/1.0';" +
@@ -91,33 +92,35 @@ function (error, result) {
 	});
 });
 
-//DOWNLOAD. DONT KNOW WHAT THIS
-router.get("/download",function(req,res,next){
-	
+//DOWNLOAD
+router.get('/download', function(req, res) {
 	var url = req.originalUrl;
 	var path = url.replace('/download/', '');
-	client.execute("XQUERY doc('"+path+"')",
-		function(error, result) {
-			if (error) {
-				console.error(error);
-			}
+	client.execute("XQUERY declare default element namespace 'http://www.tei-c.org/ns/1.0';" +
+  	"(doc('Colenso/"+fileName+"'))[1]",
+		function (error, result) {
+  			if(error){
+	   			console.error(error);
+	  		}
 			else {
-				var doc = result.result;
-				var filename = 'tei_document.xml';
+				var name = fileName;
 				res.writeHead(200, {
-					'Content-Disposition': 'attachment; filename=' + filename,
+					'Content-Type': 'application/force-download','Content-disposition': 'attachment; filename=' + name,
 				});
-				res.write(doc);
+
+				res.write(result.result);
 				res.end();
-			}
-		}
-	)
+
+	 		}
+	});
 });
 
+
+//SEE ALL
 router.get("/All",function(req,res){
 
       var TEIs = xml_lines;
-      var length = TEIs.length;
+      var length = TEIs.length - 1;
       res.render('All', {files: TEIs, numResults: length});
 
 });
