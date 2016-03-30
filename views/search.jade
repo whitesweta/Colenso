@@ -14,6 +14,10 @@ block content
 		br
 		p Your query had #{numResults} results, these are listed below:
 		br
+		form(action = "/search", method = "get")
+					input#string.form-control(type='text', placeholder='Enter a string', name = "searchString" )
+					br
+					input(type="submit")
 	.container
 		each file in files
 			li

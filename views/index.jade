@@ -6,6 +6,8 @@ block Intro
 	.container
 		.row
 			.col-lg-12
+			img(src='/img/logo.png', alt='Colenso Logo', style='width:200px;height:130px;')
+			br
 			heading #{title}.
 			p
 			br
@@ -138,25 +140,24 @@ block Add
 		.row
 			.col-lg-12
 			h1 Add
-			br
-			br
-			br
-			br
-			br
-			br
-			br
-			br
-			br
-			br
-			br
-			br
-			br
-			br
-			br
-			br
-			br
-			br
-			br
-			br
+			.container
+				smallBold You can upload your own TEI file to the existing database here
+				br
+				br
+				br
+				br
+				form(action="/upload?path=" + path, method="post", enctype="multipart/form-data")
+					input.form-control(type="file", placeholder='Please select a file', name="file")
+					br
+					button(type="submit") Add to Database
+				br
+				br
+				br
+				br
+				br
+				br
+				br
+				br
+				br
 
 
